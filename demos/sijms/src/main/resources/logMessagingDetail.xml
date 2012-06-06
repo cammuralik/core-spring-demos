@@ -25,7 +25,7 @@
     </logger>
 
     <!-- ActiveMQ -->
-    <logger name="org.apache.activemq" level="trace">
+    <logger name="org.apache.activemq" level="warn">
         <appender-ref ref="jmslogfile"/>
     </logger>
 
@@ -33,7 +33,7 @@
     <logger name="org.springframework.integration" level="trace">
         <appender-ref ref="jmslogfile"/>
     </logger>
-    <logger name="org.springframework.beans" level="trace">
+    <logger name="org.springframework.beans" level="warn">
         <appender-ref ref="jmslogfile"/>
     </logger>
 </included>

@@ -11,8 +11,8 @@
 
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-			<pattern>%-5level %logger{0}|%msg%n</pattern>
-		</encoder>
+            <pattern>%d{HH:mm}|%.-1level|%-40.40logger{0}|%msg%n%n</pattern>
+        </encoder>
 	</appender>
 
 

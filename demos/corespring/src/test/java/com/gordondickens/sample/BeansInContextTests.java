@@ -87,8 +87,7 @@ public class BeansInContextTests {
                         logger.debug("\t\t'{}'", annotation.annotationType());
                     }
                 }
-                if (!applicationContext.getBean(o).toString().startsWith(applicationContext.getType(o).toString() + "@"))
-                {
+                if (!applicationContext.getBean(o).toString().startsWith(applicationContext.getType(o).toString() + "@")) {
                     logger.debug("\tContents: {}", applicationContext.getBean(o).toString());
                 }
             }

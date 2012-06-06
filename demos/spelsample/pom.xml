@@ -36,7 +36,7 @@
 		<junit.version>4.10</junit.version>
 		<jodatime.version>1.6.2</jodatime.version>
 		<jta.version>1.1</jta.version>
-		<logback.version>1.0.3</logback.version>
+		<logback.version>1.0.5</logback.version>
 		<maven.aspectj.plugin>1.4</maven.aspectj.plugin>
 		<maven.assembly.plugin>2.2.2</maven.assembly.plugin>
 		<maven.clean.plugin>2.4.1</maven.clean.plugin>
@@ -57,7 +57,7 @@
 		<maven.war.plugin>2.1.1</maven.war.plugin>
 		<mockito.version>1.8.5</mockito.version>
 		<servlet.version>2.5</servlet.version>
-		<slf4j.version>1.6.4</slf4j.version>
+		<slf4j.version>1.6.5</slf4j.version>
 		<spring.version>3.1.1.RELEASE</spring.version>
 		<spring.security.version>3.0.5.RELEASE</spring.security.version>
 		<spring.webflow.version>2.3.1.RELEASE</spring.webflow.version>
