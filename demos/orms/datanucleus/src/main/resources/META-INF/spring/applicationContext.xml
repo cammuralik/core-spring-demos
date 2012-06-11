@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:c="http://www.springframework.org/schema/c"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
        xsi:schemaLocation="http://www.springframework.org/schema/beans 
            http://www.springframework.org/schema/beans/spring-beans.xsd
            http://www.springframework.org/schema/context
@@ -12,7 +12,11 @@
            http://www.springframework.org/schema/tx
            http://www.springframework.org/schema/tx/spring-tx.xsd
            http://www.springframework.org/schema/util
-           http://www.springframework.org/schema/util/spring-util.xsd">
+           http://www.springframework.org/schema/util/spring-util.xsd
+           http://www.springframework.org/schema/data/jpa
+           http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+
+    <jpa:repositories base-package="com.gordondickens.orm"/>
 
     <context:property-placeholder location="classpath*:META-INF/spring/*.properties"/>
 
@@ -44,8 +48,8 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="packagesToScan" value="com.gordondickens.orm.domain"/>
         <!--<property name="entityManagerFactoryInterface">-->
-            <!--<bean class="org.datanucleus.api.jpa.JPAEntityManagerFactory">-->
-            <!--</bean>-->
+        <!--<bean class="org.datanucleus.api.jpa.JPAEntityManagerFactory">-->
+        <!--</bean>-->
         <!--</property>-->
         <property name="persistenceProviderClass" value="org.datanucleus.api.jpa.PersistenceProviderImpl"/>
 
