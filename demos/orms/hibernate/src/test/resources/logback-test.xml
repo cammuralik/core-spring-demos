@@ -10,29 +10,27 @@
 
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <!--<pattern>%.-1level|%-40.40logger{0}|%msg%n</pattern>-->
-            <pattern>%.-1level|%logger{40}|%msg%n</pattern>
+            <pattern>%.-1level|%-40.40logger{0}|%msg%n</pattern>
         </encoder>
     </appender>
 
     <logger name="org.springframework.data" level="trace"/>
-    <!--<logger name="com.gordondickens.orm" level="debug" />-->
+    <logger name="org.springframework.orm.jpa" level="trace"/>
+    <logger name="com.gordondickens.orm" level="debug" />
     <!--<logger name="org.springframework.orm" level="warn" />-->
     <!--<logger name="org.springframework.jdbc" level="warn" />-->
     <!--<logger name="org.springframework.transaction" level="trace" />-->
 
-
-    <!--<include resource="logJpaToFile.xml" />-->
-
 <!--
     <logger name="net.sf.ehcache" level="debug"/>
     <logger name="org.hibernate" level="info"/>
-    <logger name="org.hibernate.ejb" level="debug"/>
-    <logger name="org.hibernate.sql" level="debug"/>
-    <logger name="org.hibernate.cache" level="debug"/>
-    <logger name="org.hibernate.type" level="debug"/>
-    <logger name="org.hibernate.tool.hbm2ddl" level="debug"/>
 -->
+    <logger name="org.hibernate.ejb" level="trace"/>
+    <logger name="org.hibernate.sql" level="trace"/>
+    <logger name="org.hibernate.cache" level="trace"/>
+    <logger name="org.hibernate.type" level="trace"/>
+    <logger name="org.hibernate.tool.hbm2ddl" level="trace"/>
+
     <root level="warn">
         <appender-ref ref="console" />
     </root>

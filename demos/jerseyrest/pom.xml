@@ -42,7 +42,7 @@
         <jstl.version>1.2</jstl.version>
         <jta.version>1.1</jta.version>
         <junit.version>4.10</junit.version>
-        <logback.version>1.0.5</logback.version>
+        <logback.version>1.0.6</logback.version>
 
         <maven.aspectj.plugin>1.4</maven.aspectj.plugin>
         <maven.assembly.plugin>2.3</maven.assembly.plugin>
@@ -72,7 +72,7 @@
         <servlet.version>2.5</servlet.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <roo.version>1.2.1.RELEASE</roo.version>
-        <slf4j.version>1.6.5</slf4j.version>
+        <slf4j.version>1.6.6</slf4j.version>
         <spring.version>3.1.1.RELEASE</spring.version>
         <spring.data.jpa.version>1.0.3.RELEASE</spring.data.jpa.version>
         <validation.version>1.0.0.GA</validation.version>
