@@ -3,7 +3,6 @@ package com.gordondickens.jerseyrest.web;
 import com.gordondickens.jerseyrest.domain.Item;
 import com.gordondickens.jerseyrest.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,7 +19,6 @@ import java.io.UnsupportedEncodingException;
 
 @RequestMapping("/items")
 @Controller
-@RooWebScaffold(path = "items", formBackingObject = Item.class)
 public class ItemController {
     @Autowired
     ItemService itemService;
@@ -63,7 +61,8 @@ public class ItemController {
         }
         try {
             pathSegment = UriUtils.encodePathSegment(pathSegment, enc);
-        } catch (UnsupportedEncodingException uee) {}
+        } catch (UnsupportedEncodingException uee) {
+        }
         return pathSegment;
     }
 

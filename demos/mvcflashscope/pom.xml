@@ -45,7 +45,7 @@
         <maven.compiler.plugin>2.4</maven.compiler.plugin>
         <maven.dependency.plugin>2.4</maven.dependency.plugin>
         <maven.deploy.plugin>2.7</maven.deploy.plugin>
-        <maven.enforcer.plugin>1.0.1</maven.enforcer.plugin>
+        <maven.enforcer.plugin>1.1</maven.enforcer.plugin>
         <maven.install.plugin>2.3.1</maven.install.plugin>
         <maven.jar.plugin>2.3.1</maven.jar.plugin>
         <maven.release.plugin>2.2.2</maven.release.plugin>

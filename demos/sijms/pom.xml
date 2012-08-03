@@ -25,7 +25,7 @@
         <activemq.version>5.6.0</activemq.version>
         <cglib.version>2.2.2</cglib.version>
         <commons.net.version>2.2</commons.net.version>
-        <jackson.version>1.9.6</jackson.version>
+        <jackson.version>1.9.9</jackson.version>
         <java.version>1.6</java.version>
         <jms.version>1.1.1</jms.version>
         <jta.version>1.1</jta.version>
@@ -34,7 +34,7 @@
         <maven.clean.plugin>2.4.1</maven.clean.plugin>
         <maven.compiler.plugin>2.4</maven.compiler.plugin>
         <maven.dependency.plugin>2.4</maven.dependency.plugin>
-        <maven.enforcer.plugin>1.0.1</maven.enforcer.plugin>
+        <maven.enforcer.plugin>1.1</maven.enforcer.plugin>
         <maven.release.plugin>2.2.2</maven.release.plugin>
         <maven.resources.plugin>2.5</maven.resources.plugin>
         <maven.source.plugin>2.1.2</maven.source.plugin>

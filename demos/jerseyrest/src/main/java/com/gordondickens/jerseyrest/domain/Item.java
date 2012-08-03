@@ -1,16 +1,11 @@
 package com.gordondickens.jerseyrest.domain;
 
-import flexjson.JSONDeserializer;
-import flexjson.JSONSerializer;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 @Entity
 @XmlRootElement
@@ -61,24 +56,8 @@ public class Item {
         this.version = version;
     }
 
+    @Override
     public String toString() {
         return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
-
-    public static Item fromJsonToItem(String json) {
-        return new JSONDeserializer<Item>().use(null, Item.class).deserialize(json);
-    }
-
-    public static Collection<Item> fromJsonArrayToItems(String json) {
-        return new JSONDeserializer<List<Item>>().use(null, ArrayList.class).use("values", Item.class).deserialize(json);
-    }
-
-    public static String toJsonArray(Collection<Item> collection) {
-        return new JSONSerializer().exclude("*.class").deepSerialize(collection);
-    }
-
-    public String toJson() {
-        return new JSONSerializer().exclude("*.class").deepSerialize(this);
-    }
-
 }

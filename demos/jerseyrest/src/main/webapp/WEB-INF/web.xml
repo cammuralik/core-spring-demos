@@ -57,6 +57,15 @@
         <url-pattern>/app/*</url-pattern>
     </filter-mapping>
 
+    <filter>
+        <filter-name>TeeFilter</filter-name>
+        <filter-class>ch.qos.logback.access.servlet.TeeFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>TeeFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
     <!-- Creates the Spring Container shared by all Servlets and Filters -->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -90,8 +99,8 @@
             <param-value>com.gordondickens.jerseyrest.service</param-value>
         </init-param>
         <!--<init-param>-->
-            <!--<param-name>contextConfigLocation</param-name>-->
-            <!--<param-value>WEB-INF/spring/webmvc-config.xml</param-value>-->
+        <!--<param-name>contextConfigLocation</param-name>-->
+        <!--<param-value>WEB-INF/spring/webmvc-config.xml</param-value>-->
         <!--</init-param>-->
         <load-on-startup>1</load-on-startup>
     </servlet>
@@ -113,6 +122,7 @@
         <url-pattern>/logbackStatus</url-pattern>
     </servlet-mapping>
 
+
     <session-config>
         <session-timeout>10</session-timeout>
     </session-config>
@@ -126,4 +136,6 @@
         <error-code>404</error-code>
         <location>/resourceNotFound</location>
     </error-page>
+
+
 </web-app>
