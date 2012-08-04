@@ -77,4 +77,14 @@
     <context:mbean-server/>
     <context:mbean-server/>
 
+    <!-- JAXB & Moxy -->
+    <bean id="jaxbMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+        <property name="lazyInit" value="true"/>
+        <property name="contextPath" value="com.gordondickens.jerseyrest.domain"/>
+    </bean>
+
+    <bean id="xmlHelper" class="com.gordondickens.jerseyrest.jaxb.XmlHelper">
+        <property name="metadataFile" value="classpath:/eclipselink-oxm.xml"/>
+        <property name="marshaller" ref="jaxbMarshaller"/>
+    </bean>
 </beans>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <import resource="classpath:/META-INF/spring/applicationContext-logging.xml"/>
+
+    <!-- JAXB & Moxy -->
+    <!-- the "contextPath" is the package where "jaxb.index" and "jaxb.properties" must exist -->
+    <bean id="jaxbMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+        <property name="lazyInit" value="true"/>
+        <property name="contextPath" value="com.gordondickens.jerseyrest.domain"/>
+    </bean>
+
+    <bean id="xmlHelper" class="com.gordondickens.jerseyrest.jaxb.XmlHelper">
+        <property name="metadataFile" value="classpath:/eclipselink-oxm.xml"/>
+        <property name="marshaller" ref="jaxbMarshaller"/>
+    </bean>
+</beans>
