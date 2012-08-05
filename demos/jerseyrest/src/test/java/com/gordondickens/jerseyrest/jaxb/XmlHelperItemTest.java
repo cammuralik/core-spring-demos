@@ -23,7 +23,6 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 /**
- * TODO Define ME!
  *
  * @author gordon
  *         Date: 2012-08-03
