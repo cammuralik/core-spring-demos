@@ -684,7 +684,7 @@
     </repositories>
     
    <prerequisites>
-       <maven>2.4.0</maven>
+       <maven>3.0.3</maven>
    </prerequisites>
     
 </project>
