@@ -13,9 +13,9 @@
     <name>OrmDataNucleus</name>
 
     <properties>
-        <datanucleus.version>3.0.9</datanucleus.version>
+        <datanucleus.version>3.1.1</datanucleus.version>
         <jdo.version>3.0.1</jdo.version>
-        <maven.datanucleus.plugin>3.1.0-m1</maven.datanucleus.plugin>
+        <maven.datanucleus.plugin>3.1.0-release</maven.datanucleus.plugin>
     </properties>
 
     <dependencies>
