@@ -9,7 +9,7 @@ import java.util.Set;
 @Entity
 @Cacheable
 @org.hibernate.annotations.Cache(
-        region = "mySoCalledCache", usage = CacheConcurrencyStrategy.READ_WRITE)
+        region = "mySuperCache", usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Customer {
 
     @Id
