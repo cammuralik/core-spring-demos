@@ -26,19 +26,19 @@
 		<aspectj.version>1.6.12</aspectj.version>
 		<slf4j.version>1.6.6</slf4j.version>
 		<java.version>1.6</java.version>
-		<logback.version>1.0.6</logback.version>
+		<logback.version>1.0.7</logback.version>
 <!-- 		<maven.aspectj.plugin>1.4</maven.aspectj.plugin> -->
 		<maven.aspectj.plugin>1.4</maven.aspectj.plugin>
 		<maven.assembly.plugin>2.2.2</maven.assembly.plugin>
-		<maven.clean.plugin>2.4.1</maven.clean.plugin>
+		<maven.clean.plugin>2.5</maven.clean.plugin>
 		<maven.compiler.plugin>2.4</maven.compiler.plugin>
-		<maven.dependency.plugin>2.4</maven.dependency.plugin>
+		<maven.dependency.plugin>2.5</maven.dependency.plugin>
 		<maven.deploy.plugin>2.7</maven.deploy.plugin>
 		<maven.eclipse.plugin>2.7</maven.eclipse.plugin>
 <!-- 		<maven.eclipse.plugin>2.9</maven.eclipse.plugin> -->
-		<maven.resources.plugin>2.5</maven.resources.plugin>
+		<maven.resources.plugin>2.6</maven.resources.plugin>
         <maven.source.plugin>2.1.2</maven.source.plugin>
-        <maven.surefire.plugin>2.12</maven.surefire.plugin>
+        <maven.surefire.plugin>2.12.2</maven.surefire.plugin>
         <maven.tomcat.plugin>2.0-beta-1</maven.tomcat.plugin>
         <maven.jetty.plugin>8.1.3.v20120416</maven.jetty.plugin>
         <maven.war.plugin>2.2</maven.war.plugin>

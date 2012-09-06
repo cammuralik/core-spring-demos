@@ -34,7 +34,7 @@ import static org.junit.Assert.assertThat;
 @TransactionConfiguration(defaultRollback = false)
 public class ItemServiceTests {
     private static final Logger logger = LoggerFactory.getLogger(ItemServiceTests.class);
-    private static final String BASE_URI = "http://localhost:8080/ws/rest";
+    private static final String BASE_URI = "http://localhost:8080/rest";
 
     RestTemplate restTemplate;
 
@@ -62,6 +62,9 @@ public class ItemServiceTests {
         Item item = new Item();
         item.setDescription("Super Duper Sample Item");
         item.setName("The Test Item");
+        itemService.saveItem(item);
+
+        logger.debug("Saved Item {}", item);
 
         HttpEntity<Item> httpEntity = new HttpEntity<Item>(item, headers);
     }
@@ -95,6 +98,32 @@ public class ItemServiceTests {
 //    }
 
     @Test
+    @Transactional
+    public void testRestClientGetForItemOne() {
+        Item item = createItem();
+        logger.debug("******** TESTING ********");
+        ResponseEntity<String> response = null;
+
+        try {
+            response = restTemplate.getForEntity(
+                    BASE_URI + "/1", String.class);
+
+            assertThat(response, is(not(nullValue())));
+            assertThat(HttpStatus.OK, is(equalTo(response.getStatusCode())));
+
+            assertThat(response.getBody(), is(not(nullValue())));
+            logger.debug("********** Job Request Response: {}", response.getBody());
+        } catch (ResourceAccessException e) {
+            logger.error("\n\n********************************************\n"+
+                         "************ Server NOT running ************\n" +
+                         "********************************************\n");
+        }
+    }
+
+
+
+    @Test
+    @Transactional
     public void testRestClientGet() {
         Item item = createItem();
         logger.debug("******** TESTING ********");
@@ -119,6 +148,7 @@ public class ItemServiceTests {
 
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Rollback(false)
     protected Item createItem() {
         Item item = new Item();
         item.setDescription("Test Description 1");

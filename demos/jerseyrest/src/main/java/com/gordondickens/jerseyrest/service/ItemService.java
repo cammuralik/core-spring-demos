@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface ItemService {
 
+    public String sayHi();
+
     public String getAllItems();
 
     public String getItem(Long id);

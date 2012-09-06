@@ -14,23 +14,23 @@
         <java.version>1.6</java.version>
         <java.version.range>[1.6,)</java.version.range>
         <junit.version>4.10</junit.version>
-        <logback.version>1.0.6</logback.version>
+        <logback.version>1.0.7</logback.version>
         <maven.ant.plugin>1.7</maven.ant.plugin>
         <maven.aspectj.plugin>1.4</maven.aspectj.plugin>
         <maven.assembly.plugin>2.2.2</maven.assembly.plugin>
         <maven.build.helper.plugin>1.7</maven.build.helper.plugin>
-        <maven.clean.plugin>2.4.1</maven.clean.plugin>
+        <maven.clean.plugin>2.5</maven.clean.plugin>
         <maven.compiler.plugin>2.4</maven.compiler.plugin>
-        <maven.dependency.plugin>2.4</maven.dependency.plugin>
+        <maven.dependency.plugin>2.5</maven.dependency.plugin>
         <maven.deploy.plugin>2.7</maven.deploy.plugin>
         <maven.eclipse.plugin>2.9</maven.eclipse.plugin>
-        <maven.enforcer.plugin>1.1</maven.enforcer.plugin>
+        <maven.enforcer.plugin>1.1.1</maven.enforcer.plugin>
         <maven.exec.plugin>1.2</maven.exec.plugin>
         <maven.failsafe.plugin>2.11</maven.failsafe.plugin>
         <maven.idea.plugin>2.2</maven.idea.plugin>
         <maven.jar.plugin>2.3.2</maven.jar.plugin>
         <maven.release.plugin>2.2.2</maven.release.plugin>
-        <maven.resources.plugin>2.5</maven.resources.plugin>
+        <maven.resources.plugin>2.6</maven.resources.plugin>
         <maven.sonar.plugin>2.10</maven.sonar.plugin>
         <maven.source.plugin>2.1.2</maven.source.plugin>
         <maven.surefire.plugin>2.11</maven.surefire.plugin>

@@ -15,12 +15,13 @@
     <logger name="javax.ws.rs" level="trace"/>
     <logger name="com.sun.jersey" level="trace"/>
     <logger name="org.eclipse.persistence" level="trace"/>
+    <logger name="org.springframework.web" level="debug"/>
 
     <!-- for JPA Testing -->
-    <logger name="org.hibernate.SQL" level="debug"/>
-    <logger name="org.springframework.jdbc" level="debug"/>
-    <logger name="org.springframework.orm" level="debug"/>
-    <logger name="org.springframework.transaction" level="debug"/>
+    <!--<logger name="org.hibernate.SQL" level="debug"/>-->
+    <!--<logger name="org.springframework.jdbc" level="debug"/>-->
+    <!--<logger name="org.springframework.orm" level="debug"/>-->
+    <!--<logger name="org.springframework.transaction" level="debug"/>-->
 
     <root level="warn">
         <appender-ref ref="console"/>

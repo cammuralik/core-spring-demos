@@ -6,6 +6,7 @@ import com.gordondickens.jerseyrest.repository.ItemRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,7 +18,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
-@Service
+@Component
 @Transactional
 @Path("/rest")
 public class ItemServiceImpl implements ItemService {
@@ -47,9 +48,18 @@ public class ItemServiceImpl implements ItemService {
         return result;
     }
 
+
+    @GET
+    @Produces({MediaType.TEXT_PLAIN})
+    @Path("/hi")
+    @Override
+    public String sayHi() {
+        return "Hi JerseyRest GET worked.";
+    }
+
     @GET
     @Produces({MediaType.TEXT_PLAIN, MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    @Path("{id}")
+    @Path("/{id}")
     @Override
     public String getItem(@PathParam("id") Long id) {
         Item item = findItem(id);
