@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.BeforeTransaction;
@@ -21,10 +22,14 @@ import javax.sql.DataSource;
 import java.math.BigDecimal;
 
 import static junit.framework.Assert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 @ContextConfiguration("classpath*:/META-INF/spring/*.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
-@TransactionConfiguration(defaultRollback = false)
+@TransactionConfiguration
+//@TransactionConfiguration(defaultRollback = false)
+@ActiveProfiles(profiles = "derby")
 public class CustomerTest {
 
     private Logger logger = LoggerFactory.getLogger(CustomerTest.class);
@@ -79,20 +84,25 @@ public class CustomerTest {
         c.setFirstName("Phil");
         c.setLastName("ADelphia");
 
-        assertNull("Initial Customer Must be Valid", c.getId());
-
         session.save(c);
+        assertThat("Initial Customer Must be Valid",
+                c.getId(), notNullValue());
+
         session.flush();
         session.clear();
 
         Customer c2 = (Customer) session.load(Customer.class, c.getId());
 
-        assertNotNull("Customer Loaded into Session by ID Must Exist", c2.getId());
-        assertEquals("Customer Loaded into Session by ID Must Match Initial Customer", c.getId(), c2.getId());
-        assertTrue("Initial Customer Entity in Cache Must not be Same as Customer Loaded by ID", c != c2);
+        assertThat("Customer Loaded into Session by ID Must Exist",
+                c2.getId(), notNullValue());
+        assertThat("Customer Loaded into Session by ID Must Match Initial Customer",
+                c.getId(), equalTo(c2.getId()));
+        assertThat("Initial Customer Entity in Cache Must not be Same as Customer Loaded by ID",
+                c, not(sameInstance(c2)));
 
         /* session.flush(); */
     }
+
 
     @Test
     @Transactional
@@ -103,8 +113,9 @@ public class CustomerTest {
                 "select c from Customer c "
                         + "where c.id = (select min(c2.id) from Customer c2)")
                 .uniqueResult();
-        assertNotNull(c);
-        assertTrue("Customer Entity Must Exist in Cache", factory.getCache().containsEntity(Customer.class, c.getId()));
+        assertThat(c, notNullValue());
+        assertThat("Customer Entity Must Exist in Cache",
+                factory.getCache().containsEntity(Customer.class, c.getId()));
     }
 
     @Test
@@ -117,7 +128,8 @@ public class CustomerTest {
         p.setName("The Widget");
         session.save(p);
         session.flush();
-        assertFalse("Product Entity Must Exist in Cache", factory.getCache().containsEntity(Product.class, p.getId()));
+        assertFalse("Product Entity Must Exist in Cache",
+                factory.getCache().containsEntity(Product.class, p.getId()));
     }
 
     @Test
@@ -128,15 +140,8 @@ public class CustomerTest {
         Session session = factory.getCurrentSession();
         Long size = (Long) session.createQuery(
                 "select count(c) from Customer c").uniqueResult();
-        assertEquals("Exactly 5 Records Must Exist", Long.valueOf(5), size);
+        assertThat("Exactly 5 Records Must Exist",
+                (long) 5, equalTo(size));
 
     }
-
-    @Test
-    @Transactional
-    public void createALotOfStuff() {
-        logger.debug("***** TODO Do something in this test ******");
-        // TODO - Um, do something here!?!?
-    }
-
 }

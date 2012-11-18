@@ -1,5 +1,7 @@
 package com.gordondickens.hiburrdemo;
 
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 

@@ -3,14 +3,18 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
          http://www.springframework.org/schema/beans/spring-beans.xsd
          http://www.springframework.org/schema/context
          http://www.springframework.org/schema/context/spring-context.xsd
          http://www.springframework.org/schema/tx
-         http://www.springframework.org/schema/tx/spring-tx.xsd">
-
-    <context:property-placeholder location="classpath*:META-INF/spring/*.properties"/>
+         http://www.springframework.org/schema/tx/spring-tx.xsd
+         http://www.springframework.org/schema/util
+         http://www.springframework.org/schema/util/spring-util.xsd
+         http://www.springframework.org/schema/jdbc
+         http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
 
     <context:component-scan base-package="com.gordondickens.hiburrdemo"/>
 
@@ -26,7 +30,7 @@
         <property name="timeBetweenEvictionRunsMillis" value="1800000"/>
         <property name="numTestsPerEvictionRun" value="3"/>
         <property name="minEvictableIdleTimeMillis" value="1800000"/>
-        <property name="validationQuery" value="SELECT version();"/>
+        <!--<property name="validationQuery" value="SELECT 1"/>-->
     </bean>
 
     <bean class="org.springframework.orm.hibernate3.HibernateTransactionManager"
@@ -38,20 +42,156 @@
           class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="packagesToScan" value="com.gordondickens.hiburrdemo"/>
-        <property name="hibernateProperties">
-            <!-- you can set the following additional values or see persistence.xml
-                   hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
-                   hibernate.generate_statistics=true
-                   hibernate.show_sql=true
-                   hibernate.format_sql=true
-                   hibernate.use_sql_comments=true
-               -->
-            <value>
-                hibernate.cache.provider_class=org.hibernate.cache.EhCacheProvider
-                hibernate.hbm2ddl.auto=update
-            </value>
-        </property>
+        <property name="hibernateProperties" ref="hibernatePropsYo"/>
     </bean>
 
     <tx:annotation-driven/>
+
+    <!-- System.out.println & System.err.println handling through SLF4J -->
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetClass" value="uk.org.lidalia.sysoutslf4j.context.SysOutOverSLF4J"/>
+        <property name="staticMethod"
+                  value="uk.org.lidalia.sysoutslf4j.context.SysOutOverSLF4J.sendSystemOutAndErrToSLF4J"/>
+        <property name="arguments">
+            <list>
+                <!-- Set log level for System.out -->
+                <util:constant static-field="uk.org.lidalia.sysoutslf4j.context.LogLevel.DEBUG"/>
+                <!-- Set log level for System.err -->
+                <util:constant static-field="uk.org.lidalia.sysoutslf4j.context.LogLevel.ERROR"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Enable handling of java.util.logging through SLF4J -->
+    <bean id="slf4JBridgeHandler" class="org.slf4j.bridge.SLF4JBridgeHandler"
+          init-method="removeHandlersForRootLogger"/>
+    <bean class="org.slf4j.bridge.SLF4JBridgeHandler"
+          init-method="install"
+          depends-on="slf4JBridgeHandler"/>
+
+    <!-- ************************************** -->
+    <!-- *** Profile Specific Configuration *** -->
+    <!-- ************************************** -->
+
+    <!-- HBM2DDL
+         "create"      - to build a new database on each run
+        "update"      - modify an existing database
+        "create-drop" - same as "create" and drops tables on Hibernate close
+        "validate"    - no changes to the database
+    -->
+
+    <beans profile="hsql,default">
+        <!--<jdbc:embedded-database id="dataSource" type="hsql"/>-->
+        <context:property-placeholder location="classpath*:META-INF/spring/hsql.properties"/>
+
+        <util:properties id="hibernatePropsYo">
+            <prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop>
+            <prop key="hibernate.generate_statistics">true</prop>
+            <prop key="hibernate.show_sql">true</prop>
+            <prop key="hibernate.format_sql">true</prop>
+            <prop key="hibernate.use_sql_comments">true</prop>
+            <prop key="hibernate.hbm2ddl.auto">create-drop</prop>
+            <prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
+            <prop key="hibernate.connection.charSet">UTF-8</prop>
+            <prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
+            <prop key="hibernate.cache.use_structured_entries">true</prop>
+            <prop key="hibernate.cache.use_second_level_cache">true</prop>
+            <prop key="hibernate.cache.use_query_cache">true</prop>
+        </util:properties>
+    </beans>
+
+    <beans profile="h2">
+        <context:property-placeholder location="classpath*:META-INF/spring/h2.properties"/>
+
+        <util:properties id="hibernatePropsYo">
+            <prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
+            <prop key="hibernate.generate_statistics">true</prop>
+            <prop key="hibernate.show_sql">true</prop>
+            <prop key="hibernate.format_sql">true</prop>
+            <prop key="hibernate.use_sql_comments">true</prop>
+            <prop key="hibernate.hbm2ddl.auto">create-drop</prop>
+            <prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
+            <prop key="hibernate.connection.charSet">UTF-8</prop>
+            <prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
+            <prop key="hibernate.cache.use_structured_entries">true</prop>
+            <prop key="hibernate.cache.use_second_level_cache">true</prop>
+            <prop key="hibernate.cache.use_query_cache">true</prop>
+        </util:properties>
+    </beans>
+
+    <beans profile="derby">
+        <context:property-placeholder location="classpath*:META-INF/spring/derby.properties"/>
+
+        <util:properties id="hibernatePropsYo">
+            <prop key="hibernate.dialect">org.hibernate.dialect.DerbyDialect</prop>
+            <prop key="hibernate.generate_statistics">true</prop>
+            <prop key="hibernate.show_sql">true</prop>
+            <prop key="hibernate.format_sql">true</prop>
+            <prop key="hibernate.use_sql_comments">true</prop>
+            <prop key="hibernate.hbm2ddl.auto">create-drop</prop>
+            <prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
+            <prop key="hibernate.connection.charSet">UTF-8</prop>
+            <prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
+            <prop key="hibernate.cache.use_structured_entries">true</prop>
+            <prop key="hibernate.cache.use_second_level_cache">true</prop>
+            <prop key="hibernate.cache.use_query_cache">true</prop>
+        </util:properties>
+    </beans>
+
+    <beans profile="mysql">
+        <context:property-placeholder location="classpath*:META-INF/spring/mysql.properties"/>
+
+        <util:properties id="hibernatePropsYo">
+            <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+            <prop key="hibernate.generate_statistics">true</prop>
+            <prop key="hibernate.show_sql">true</prop>
+            <prop key="hibernate.format_sql">true</prop>
+            <prop key="hibernate.use_sql_comments">true</prop>
+            <prop key="hibernate.hbm2ddl.auto">update</prop>
+            <prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
+            <prop key="hibernate.connection.charSet">UTF-8</prop>
+            <prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
+            <prop key="hibernate.cache.use_structured_entries">true</prop>
+            <prop key="hibernate.cache.use_second_level_cache">true</prop>
+            <prop key="hibernate.cache.use_query_cache">true</prop>
+        </util:properties>
+    </beans>
+
+    <beans profile="postgres">
+        <context:property-placeholder location="classpath*:META-INF/spring/postgres.properties"/>
+
+        <util:properties id="hibernatePropsYo">
+            <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+            <prop key="hibernate.generate_statistics">true</prop>
+            <prop key="hibernate.show_sql">true</prop>
+            <prop key="hibernate.format_sql">true</prop>
+            <prop key="hibernate.use_sql_comments">true</prop>
+            <prop key="hibernate.hbm2ddl.auto">update</prop>
+            <prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
+            <prop key="hibernate.connection.charSet">UTF-8</prop>
+            <prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
+            <prop key="hibernate.cache.use_structured_entries">true</prop>
+            <prop key="hibernate.cache.use_second_level_cache">true</prop>
+            <prop key="hibernate.cache.use_query_cache">true</prop>
+        </util:properties>
+    </beans>
+
+    <beans profile="oracle">
+        <context:property-placeholder location="classpath*:META-INF/spring/oracle.properties"/>
+
+        <util:properties id="hibernatePropsYo">
+            <prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
+            <prop key="hibernate.generate_statistics">true</prop>
+            <prop key="hibernate.show_sql">true</prop>
+            <prop key="hibernate.format_sql">true</prop>
+            <prop key="hibernate.use_sql_comments">true</prop>
+            <prop key="hibernate.hbm2ddl.auto">update</prop>
+            <prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
+            <prop key="hibernate.connection.charSet">UTF-8</prop>
+            <prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
+            <prop key="hibernate.cache.use_structured_entries">true</prop>
+            <prop key="hibernate.cache.use_second_level_cache">true</prop>
+            <prop key="hibernate.cache.use_query_cache">true</prop>
+        </util:properties>
+    </beans>
 </beans>
