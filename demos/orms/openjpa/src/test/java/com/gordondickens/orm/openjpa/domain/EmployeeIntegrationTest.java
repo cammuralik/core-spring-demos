@@ -1,4 +1,4 @@
-package com.gordondickens.orm.domain;
+package com.gordondickens.orm.openjpa.domain;
 
 import com.gordondickens.orm.service.EmployeeService;
 import org.junit.Test;

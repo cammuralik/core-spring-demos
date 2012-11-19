@@ -1,6 +1,6 @@
-package com.gordondickens.orm.service;
+package com.gordondickens.orm.openjpa.service;
 
-import com.gordondickens.orm.domain.Employee;
+import com.gordondickens.orm.openjpa.domain.Employee;
 
 import java.util.List;
 

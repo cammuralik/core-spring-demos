@@ -1,4 +1,4 @@
-package com.gordondickens.orm.domain;
+package com.gordondickens.orm.openjpa.domain;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -13,30 +13,6 @@ public class Employee {
     private String lastName;
 
     private String comments;
-
-    public String getFirstName() {
-        return this.firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return this.lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getComments() {
-        return this.comments;
-    }
-
-    public void setComments(String comments) {
-        this.comments = comments;
-    }
 
     public String toString() {
         return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
@@ -65,5 +41,29 @@ public class Employee {
 
     public void setVersion(Integer version) {
         this.version = version;
+    }
+
+    public String getFirstName() {
+        return this.firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return this.lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getComments() {
+        return this.comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
     }
 }

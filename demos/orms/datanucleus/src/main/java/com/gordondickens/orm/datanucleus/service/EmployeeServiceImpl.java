@@ -1,13 +1,14 @@
-package com.gordondickens.orm.service;
+package com.gordondickens.orm.datanucleus.service;
 
-import com.gordondickens.orm.domain.Employee;
-import com.gordondickens.orm.repository.EmployeeRepository;
+import com.gordondickens.orm.datanucleus.domain.Employee;
+import com.gordondickens.orm.datanucleus.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-
+@Service
 @Transactional
 public class EmployeeServiceImpl implements EmployeeService {
 
@@ -18,11 +19,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.count();
     }
 
-    public void deleteEmployee(Employee employee) {
+    public void deleteEmployee(final Employee employee) {
         employeeRepository.delete(employee);
     }
 
-    public Employee findEmployee(Long id) {
+    public Employee findEmployee(final Long id) {
         return employeeRepository.findOne(id);
     }
 
@@ -30,15 +31,15 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.findAll();
     }
 
-    public List<Employee> findEmployeeEntries(int firstResult, int maxResults) {
+    public List<Employee> findEmployeeEntries(final int firstResult, final int maxResults) {
         return employeeRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults)).getContent();
     }
 
-    public void saveEmployee(Employee employee) {
+    public void saveEmployee(final Employee employee) {
         employeeRepository.save(employee);
     }
 
-    public Employee updateEmployee(Employee employee) {
+    public Employee updateEmployee(final Employee employee) {
         return employeeRepository.save(employee);
     }
 }

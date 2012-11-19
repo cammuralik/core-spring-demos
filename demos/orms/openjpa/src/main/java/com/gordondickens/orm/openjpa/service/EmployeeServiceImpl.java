@@ -1,8 +1,9 @@
-package com.gordondickens.orm.service;
+package com.gordondickens.orm.openjpa.service;
 
-import com.gordondickens.orm.domain.Employee;
-import com.gordondickens.orm.repository.EmployeeRepository;
 import java.util.List;
+
+import com.gordondickens.orm.openjpa.domain.Employee;
+import com.gordondickens.orm.openjpa.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

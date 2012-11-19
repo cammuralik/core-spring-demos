@@ -5,7 +5,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:util="http://www.springframework.org/schema/util"
        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans.xsd
            http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context.xsd
@@ -16,11 +16,11 @@
            http://www.springframework.org/schema/data/jpa
            http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
-    <jpa:repositories base-package="com.gordondickens.orm"/>
+    <jpa:repositories base-package="com.gordondickens.orm.datanucleus.repository"/>
 
     <context:property-placeholder location="classpath*:META-INF/spring/*.properties"/>
 
-    <context:component-scan base-package="com.gordondickens.orm">
+    <context:component-scan base-package="com.gordondickens.orm.datanucleus">
         <context:exclude-filter expression="org.springframework.stereotype.Controller" type="annotation"/>
     </context:component-scan>
 
@@ -47,15 +47,10 @@
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="packagesToScan" value="com.gordondickens.orm.domain"/>
-        <!--<property name="entityManagerFactoryInterface">-->
-        <!--<bean class="org.datanucleus.api.jpa.JPAEntityManagerFactory">-->
-        <!--</bean>-->
-        <!--</property>-->
         <property name="persistenceProviderClass" value="org.datanucleus.api.jpa.PersistenceProviderImpl"/>
 
 
         <!-- SEE: org.datanucleus.PropertyNames for available properties -->
-
         <property name="jpaProperties">
             <util:properties>
                 <!--<prop key="datanucleus.ConnectionDriverName">${database.driverClassName}</prop>-->
@@ -82,6 +77,4 @@
             </util:properties>
         </property>
     </bean>
-
-    <bean id="employeeService" class="com.gordondickens.orm.service.EmployeeServiceImpl"/>
 </beans>
