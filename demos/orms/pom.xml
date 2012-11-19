@@ -5,7 +5,7 @@
     <groupId>com.gordondickens.orm</groupId>
     <artifactId>orms</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.1</version>
+    <version>1.0.5</version>
     <name>Orms</name>
 
     <modules>
@@ -13,33 +13,38 @@
         <module>eclipselink</module>
         <module>hibernate</module>
         <module>openjpa</module>
+        <module>querydsl</module>
         <module>reporting</module>
     </modules>
 
     <properties>
         <ant.version>1.8.4</ant.version>
         <asm.version>3.3.1</asm.version>
-        <aspectj.version>1.7.0</aspectj.version>
+        <aspectj.version>1.7.1</aspectj.version>
         <cglib.version>2.2.2</cglib.version>
         <commons.dbcp.version>1.4</commons.dbcp.version>
         <commons.lang.version>3.1</commons.lang.version>
         <commons.pool.version>1.6</commons.pool.version>
+        <doxia-module-markdown.version>1.3</doxia-module-markdown.version>
         <geronimo.jpa.version>1.1</geronimo.jpa.version>
+        <hamcrest.version>1.3</hamcrest.version>
         <h2database.version>1.3.168</h2database.version>
         <hsqldb.version>1.8.0.10</hsqldb.version>
+        <janino.version>2.6.1</janino.version>
         <java.version>1.6</java.version>
         <javassist.version>3.16.1-GA</javassist.version>
         <jodatime.version>2.1</jodatime.version>
         <jodatime.hibernate.version>1.3</jodatime.hibernate.version>
         <jta.version>1.1</jta.version>
-        <junit.version>4.10</junit.version>
+        <junit.version>4.11</junit.version>
         <logback.version>1.0.7</logback.version>
         <maven.ant.plugin>1.7</maven.ant.plugin>
+        <maven-apt-plugin.version>1.0.4</maven-apt-plugin.version>
         <maven.aspectj.plugin>1.4</maven.aspectj.plugin>
         <maven.assembly.plugin>2.3</maven.assembly.plugin>
         <maven.checkstyle.plugin>2.9.1</maven.checkstyle.plugin>
         <maven.clean.plugin>2.5</maven.clean.plugin>
-        <maven.cloudfoundry.plugin>1.0.0.M1</maven.cloudfoundry.plugin>
+        <maven.cloudfoundry.plugin>1.0.0.M2</maven.cloudfoundry.plugin>
         <maven.cobertura.plugin>2.5.1</maven.cobertura.plugin>
         <maven.compiler.plugin>2.5.1</maven.compiler.plugin>
         <maven.dependency.plugin>2.5.1</maven.dependency.plugin>
@@ -54,7 +59,7 @@
         <maven.install.plugin>2.4</maven.install.plugin>
         <maven.jar.plugin>2.4</maven.jar.plugin>
         <maven.javadoc.plugin>2.9</maven.javadoc.plugin>
-        <maven.jetty.plugin>8.1.5.v20120716</maven.jetty.plugin>
+        <maven.jetty.plugin>8.1.8.v20121106</maven.jetty.plugin>
         <maven.jxr.plugin>2.3</maven.jxr.plugin>
         <maven.plugin.plugin>3.1</maven.plugin.plugin>
         <maven.pmd.plugin>2.7.1</maven.pmd.plugin>
@@ -74,11 +79,13 @@
         <maven.versions.plugin>1.3.1</maven.versions.plugin>
         <maven.war.plugin>2.3</maven.war.plugin>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <querydsl.version>2.8.2</querydsl.version>
         <servlet.version>2.5</servlet.version>
-        <slf4j.version>1.6.6</slf4j.version>
-        <!-- <spring.data.jpa.version>1.1.0.RELEASE</spring.data.jpa.version> -->
-        <spring.data.jpa.version>1.2.0.BUILD-SNAPSHOT</spring.data.jpa.version>
-        <spring.version>3.2.0.M1</spring.version>
+        <slf4j.version>1.7.2</slf4j.version>
+        <spring.data.jpa.version>1.2.0.RELEASE</spring.data.jpa.version>
+        <spring.data.commons.version>1.4.0.RELEASE</spring.data.commons.version>
+        <spring.version>3.2.0.RC1</spring.version>
         <validation.version>1.0.0.GA</validation.version>
         <wtp.version>2.0</wtp.version>
     </properties>
@@ -98,7 +105,11 @@
         <!-- General dependencies for standard applications -->
         <dependency>
             <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+            <artifactId>junit-dep</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-library</artifactId>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -140,6 +151,10 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.mysema.querydsl</groupId>
+            <artifactId>querydsl-jpa</artifactId>
         </dependency>
         <dependency>
             <groupId>javax.validation</groupId>
@@ -194,8 +209,6 @@
                 <artifactId>hsqldb</artifactId>
                 <version>${hsqldb.version}</version>
             </dependency>
-
-
             <dependency>
                 <groupId>org.aspectj</groupId>
                 <artifactId>aspectjrt</artifactId>
@@ -222,6 +235,16 @@
                 <groupId>org.springframework.data</groupId>
                 <artifactId>spring-data-jpa</artifactId>
                 <version>${spring.data.jpa.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-commons-core</artifactId>
+                <version>${spring.data.commons.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.mysema.querydsl</groupId>
+                <artifactId>querydsl-jpa</artifactId>
+                <version>${querydsl.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
@@ -272,17 +295,6 @@
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
-                <artifactId>spring-asm</artifactId>
-                <version>${spring.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>commons-logging</groupId>
-                        <artifactId>commons-logging</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
                 <artifactId>spring-aspects</artifactId>
                 <version>${spring.version}</version>
             </dependency>
@@ -320,8 +332,32 @@
             </dependency>
             <dependency>
                 <groupId>junit</groupId>
+                <artifactId>junit-dep</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.hamcrest</groupId>
+                <artifactId>hamcrest-core</artifactId>
+                <version>${hamcrest.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.hamcrest</groupId>
+                <artifactId>hamcrest-all</artifactId>
+                <version>${hamcrest.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.hamcrest</groupId>
+                <artifactId>hamcrest-library</artifactId>
+                <version>${hamcrest.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -391,6 +427,11 @@
                 <groupId>org.javassist</groupId>
                 <artifactId>javassist</artifactId>
                 <version>${javassist.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.janino</groupId>
+                <artifactId>janino</artifactId>
+                <version>${janino.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -475,13 +516,13 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
                 <version>${maven.source.plugin}</version>
-<executions>
-<execution>
-<goals>
-<goal>jar</goal>
-</goals>
-</execution>
-</executions>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -549,21 +590,6 @@
                                 <outputDirectory>${project.basedir}/target/site/testresults</outputDirectory>
                             </configuration>
                         </plugin>
-                        <!--<plugin>-->
-                            <!--<groupId>org.apache.maven.plugins</groupId>-->
-                            <!--<artifactId>maven-javadoc-plugin</artifactId>-->
-                            <!--<version>${maven.javadoc.plugin}</version>-->
-                            <!--<configuration>-->
-                                <!--<aggregate>true</aggregate>-->
-                            <!--</configuration>-->
-                            <!--<dependencies>-->
-                                <!--<dependency>-->
-                                    <!--<groupId>org.apache.ant</groupId>-->
-                                    <!--<artifactId>ant</artifactId>-->
-                                    <!--<version>${ant.version}</version>-->
-                                <!--</dependency>-->
-                            <!--</dependencies>-->
-                        <!--</plugin>-->
                         <plugin>
                             <groupId>org.apache.maven.plugins</groupId>
                             <artifactId>maven-checkstyle-plugin</artifactId>
@@ -572,86 +598,71 @@
                                 <aggregate>true</aggregate>
                             </configuration>
                         </plugin>
-                        <!--<plugin>-->
-                            <!--<groupId>org.apache.maven.plugins</groupId>-->
-                            <!--<artifactId>maven-project-info-reports-plugin</artifactId>-->
-                            <!--<version>${maven.project.info.reports.plugin}</version>-->
-                            <!--<configuration>-->
-                                <!--<aggregate>true</aggregate>-->
-                            <!--</configuration>-->
-                        <!--</plugin>-->
-                        <!--<plugin>-->
-                            <!--<groupId>org.apache.maven.plugins</groupId>-->
-                            <!--<artifactId>maven-jxr-plugin</artifactId>-->
-                            <!--<version>${maven.jxr.plugin}</version>-->
-                            <!--<configuration>-->
-                                <!--<aggregate>true</aggregate>-->
-                            <!--</configuration>-->
-                        <!--</plugin>-->
-                        <!--<plugin>-->
-                            <!--<groupId>org.codehaus.mojo</groupId>-->
-                            <!--<artifactId>cobertura-maven-plugin</artifactId>-->
-                            <!--<version>${maven.cobertura.plugin}</version>-->
-                            <!--<configuration>-->
-                                <!--<aggregate>true</aggregate>-->
-                            <!--</configuration>-->
-                        <!--</plugin>-->
-                        <!--<plugin>-->
-                            <!--<groupId>org.apache.maven.plugins</groupId>-->
-                            <!--<artifactId>maven-pmd-plugin</artifactId>-->
-                            <!--<version>${maven.pmd.plugin}</version>-->
-                            <!--<inherited>true</inherited>-->
-                            <!--<configuration>-->
-                                <!--<rulesets>-->
-                                    <!--<ruleset>/rulesets/basic.xml</ruleset>-->
-                                    <!--<ruleset>/rulesets/controversial.xml</ruleset>-->
-                                <!--</rulesets>-->
-                                <!--<sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>-->
-                                <!--<minimumTokens>100</minimumTokens>-->
-                                <!--<targetJdk>${java.version}</targetJdk>-->
-                            <!--</configuration>-->
-                        <!--</plugin>-->
-                        <!--<plugin>-->
-                            <!--<groupId>org.codehaus.mojo</groupId>-->
-                            <!--<artifactId>findbugs-maven-plugin</artifactId>-->
-                            <!--<version>${maven.findbugs.plugin}</version>-->
-                        <!--</plugin>-->
-                        <!--<plugin>-->
-                            <!--<groupId>org.codehaus.mojo</groupId>-->
-                            <!--<artifactId>taglist-maven-plugin</artifactId>-->
-                            <!--<version>${maven.taglist.plugin}</version>-->
-                            <!--<inherited>true</inherited>-->
-                        <!--</plugin>-->
                     </reportPlugins>
                     <locales>en</locales>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.doxia</groupId>
+                        <artifactId>doxia-module-markdown</artifactId>
+                        <version>${doxia-module-markdown.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
-            <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
             <plugin>
-                <groupId>org.eclipse.m2e</groupId>
-                <artifactId>lifecycle-mapping</artifactId>
-                <version>1.0.0</version>
-                <configuration>
-                    <lifecycleMappingMetadata>
-                        <pluginExecutions>
-                            <pluginExecution>
-                                <pluginExecutionFilter>
-                                    <groupId>org.apache.maven.plugins</groupId>
-                                    <artifactId>maven-dependency-plugin</artifactId>
-                                    <versionRange>[2.4,)</versionRange>
-                                    <goals>
-                                        <goal>sources</goal>
-                                    </goals>
-                                </pluginExecutionFilter>
-                                <action>
-                                    <ignore/>
-                                </action>
-                            </pluginExecution>
-                        </pluginExecutions>
-                    </lifecycleMappingMetadata>
-                </configuration>
+                <groupId>com.mysema.maven</groupId>
+                <artifactId>maven-apt-plugin</artifactId>
+                <version>${maven-apt-plugin.version}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.mysema.querydsl</groupId>
+                        <artifactId>querydsl-apt</artifactId>
+                        <version>${querydsl.version}</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>process</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>target/generated-sources</outputDirectory>
+                            <processor>com.mysema.query.apt.jpa.JPAAnnotationProcessor</processor>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
+        <pluginManagement>
+            <plugins>
+                <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+                <plugin>
+                    <groupId>org.eclipse.m2e</groupId>
+                    <artifactId>lifecycle-mapping</artifactId>
+                    <version>1.0.0</version>
+                    <configuration>
+                        <lifecycleMappingMetadata>
+                            <pluginExecutions>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>org.apache.maven.plugins</groupId>
+                                        <artifactId>maven-dependency-plugin</artifactId>
+                                        <versionRange>[2.4,)</versionRange>
+                                        <goals>
+                                            <goal>sources</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <ignore/>
+                                    </action>
+                                </pluginExecution>
+                            </pluginExecutions>
+                        </lifecycleMappingMetadata>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 
     <pluginRepositories>
@@ -690,8 +701,8 @@
         </repository>
     </repositories>
 
-   <prerequisites>
-       <maven>3.0.3</maven>
-   </prerequisites>
+    <prerequisites>
+        <maven>3.0.4</maven>
+    </prerequisites>
 
 </project>

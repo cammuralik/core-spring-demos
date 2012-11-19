@@ -5,13 +5,12 @@
     <parent>
         <groupId>com.gordondickens.orm</groupId>
         <artifactId>orms</artifactId>
-        <version>1.0.1</version>
+        <version>1.0.5</version>
     </parent>
 
     <artifactId>OpenJpa</artifactId>
-    <packaging>jar</packaging>
 
-    <name>OrmOpenJpa</name>
+    <name>ORM | OpenJpa</name>
 
     <properties>
         <commons.lang2.version>2.6</commons.lang2.version>
