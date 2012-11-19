@@ -10,7 +10,7 @@
 
     <artifactId>EclipseLink</artifactId>
 
-    <name>ORM EclipseLink</name>
+    <name>ORM | EclipseLink</name>
 
     <properties>
         <eclipselink.version>2.5.0-M4</eclipselink.version>

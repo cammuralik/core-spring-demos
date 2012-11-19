@@ -4,9 +4,10 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.gordondickens.orm</groupId>
     <artifactId>orms</artifactId>
-    <packaging>pom</packaging>
     <version>1.0.5</version>
-    <name>Orms</name>
+
+    <packaging>pom</packaging>
+    <name>Spring | ORM | Demos</name>
 
     <modules>
         <module>datanucleus</module>
