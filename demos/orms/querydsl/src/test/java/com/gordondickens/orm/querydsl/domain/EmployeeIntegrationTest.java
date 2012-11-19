@@ -12,8 +12,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertSame;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.samePropertyValuesAs;
+import static org.junit.Assert.assertThat;
 
 @ContextConfiguration(classes = RepositoryConfig.class)
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -35,12 +36,12 @@ public class EmployeeIntegrationTest {
         employeeService.saveEmployee(employee);
         // logger.debug("Returned Employee '{}'", e2.toString());
         logger.debug("Employee Saved '{}'", employee.toString());
-        assertNotNull("Employee MUST exist", employee);
-        assertNotNull("Employee MUST have PK", employee.getId());
+        assertThat("Employee MUST exist", employee, notNullValue());
+        assertThat("Employee MUST have PK", employee.getId(), notNullValue());
         logger.debug("Employee {} Saved", employee.getId());
 
         Employee employee1 = employeeService.findEmployee(employee.getId());
-        assertSame("Employee Must be Found by ID", employee1.getId(),
-                employee.getId());
+        assertThat("Employee Must be Found by ID", employee1.getId(),
+                samePropertyValuesAs(employee.getId()));
     }
 }

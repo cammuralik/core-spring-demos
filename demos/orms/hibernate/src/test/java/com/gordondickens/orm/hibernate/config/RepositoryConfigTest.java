@@ -15,7 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static org.junit.Assert.assertNotNull;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.junit.Assert.assertThat;
 
 /**
  * User: gordon Date: 6/18/12 Time: 4:40 PM
@@ -48,7 +49,7 @@ public class RepositoryConfigTest {
 
     @Test
     public void testEmployeeRepository() {
-        assertNotNull("Employee Repository MUST exist", employeeRepository);
+        assertThat("Employee Repository MUST exist", employeeRepository, notNullValue());
         logger.debug(" ****** Employee Repository '{}' ******",
                 employeeRepository.toString());
 
@@ -69,5 +70,6 @@ public class RepositoryConfigTest {
         }
 
     }
+
 
 }

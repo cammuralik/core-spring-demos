@@ -12,8 +12,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertSame;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.junit.Assert.*;
 
 
 @ContextConfiguration
@@ -52,7 +52,7 @@ public class EmployeeIntegrationTest {
         employee.setUsername("cfetus");
 
         employeeService.saveEmployee(employee);
-        assertNotNull("Employee MUST exist", employee);
+        assertThat("Employee MUST exist", employee, notNullValue());
 
         employee = new Employee();
         employee.setFirstName("Bobby");
@@ -60,7 +60,7 @@ public class EmployeeIntegrationTest {
         employee.setUsername("cfetus");
 
         employeeService.saveEmployee(employee);
-        assertNotNull("Employee MUST exist", employee);
+        assertThat("Employee MUST exist", employee, notNullValue());
     }
 
 }

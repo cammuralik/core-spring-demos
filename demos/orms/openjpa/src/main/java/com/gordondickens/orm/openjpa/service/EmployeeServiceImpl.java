@@ -1,46 +1,46 @@
 package com.gordondickens.orm.openjpa.service;
 
-import java.util.List;
-
 import com.gordondickens.orm.openjpa.domain.Employee;
 import com.gordondickens.orm.openjpa.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 
 @Service
 @Transactional
 public class EmployeeServiceImpl implements EmployeeService {
 
-	@Autowired
+    @Autowired
     EmployeeRepository employeeRepository;
 
-	public long countAllEmployees() {
+    public long countAllEmployees() {
         return employeeRepository.count();
     }
 
-	public void deleteEmployee(Employee employee) {
+    public void deleteEmployee(final Employee employee) {
         employeeRepository.delete(employee);
     }
 
-	public Employee findEmployee(Long id) {
+    public Employee findEmployee(final Long id) {
         return employeeRepository.findOne(id);
     }
 
-	public List<Employee> findAllEmployees() {
+    public List<Employee> findAllEmployees() {
         return employeeRepository.findAll();
     }
 
-	public List<Employee> findEmployeeEntries(int firstResult, int maxResults) {
+    public List<Employee> findEmployeeEntries(final int firstResult, final int maxResults) {
         return employeeRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults)).getContent();
     }
 
-	public void saveEmployee(Employee employee) {
+    public void saveEmployee(final Employee employee) {
         employeeRepository.save(employee);
     }
 
-	public Employee updateEmployee(Employee employee) {
+    public Employee updateEmployee(final Employee employee) {
         return employeeRepository.save(employee);
     }
 }
