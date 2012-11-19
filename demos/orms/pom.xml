@@ -61,7 +61,7 @@
         <maven.javadoc.plugin>2.9</maven.javadoc.plugin>
         <maven.jetty.plugin>8.1.8.v20121106</maven.jetty.plugin>
         <maven.jxr.plugin>2.3</maven.jxr.plugin>
-        <maven.plugin.plugin>3.1</maven.plugin.plugin>
+        <maven.plugin.plugin>3.2</maven.plugin.plugin>
         <maven.pmd.plugin>2.7.1</maven.pmd.plugin>
         <maven.project.info.reports.plugin>2.5.1</maven.project.info.reports.plugin>
         <maven.release.plugin>2.3.2</maven.release.plugin>
