@@ -10,13 +10,9 @@
         <version>1.0.5</version>
     </parent>
 
-    <artifactId>reporting</artifactId>
+    <artifactId>Reporting</artifactId>
 
     <name>ORM | Reporting</name>
-
-    <properties>
-        <skipTests>true</skipTests>
-    </properties>
 
     <build>
         <resources>
